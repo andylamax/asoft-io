@@ -1,9 +1,9 @@
 package tz.co.asoft.io.file
 
-import io.ktor.utils.io.errors.IOException
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Uint8Array
 import org.w3c.files.Blob
+import tz.co.asoft.io.exceptions.IOException
 import tz.co.asoft.io.tools.readBytes
 import tz.co.asoft.io.tools.toByteArray
 import org.w3c.files.File as JsFile
