@@ -22,10 +22,16 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-js-wrappers' }
+    maven { url 'https://dl.bintray.com/kotlinx/kotlinx' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+
 }
 
 group 'tz.co.asoft'
-version '1.0.0'
+version '1.1.0'
 
 apply plugin: "com.android.library"
 apply plugin: "maven-publish"
@@ -83,8 +89,8 @@ kotlin {
         compilations.all {
             tasks[compileKotlinTaskName].kotlinOptions {
                 kotlinOptions.metaInfo = true
-                kotlinOptions.sourceMap = true
-                kotlinOptions.moduleKind = 'commonjs'
+                kotlinOptions.sourceMap = false
+                kotlinOptions.moduleKind = 'umd'
                 kotlinOptions.main = "call"
             }
         }
@@ -134,6 +140,7 @@ kotlin {
             dependencies {
                 api kotlin('stdlib-js')
                 api "io.ktor:ktor-client-js:$ktor_version"
+                api(npm("text-encoding", "0.7.0"))
             }
         }
 
