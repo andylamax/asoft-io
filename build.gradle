@@ -19,11 +19,13 @@ plugins {
 }
 
 repositories {
+    google()
+    jcenter()
     mavenCentral()
 }
 
 group 'tz.co.asoft'
-version '0.0.8'
+version '1.0.0'
 
 apply plugin: "com.android.library"
 apply plugin: "maven-publish"
