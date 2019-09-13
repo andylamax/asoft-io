@@ -1,6 +1,6 @@
 package tz.co.asoft.io.file
 
-import kotlinx.io.errors.IOException
+import io.ktor.utils.io.errors.IOException
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Uint8Array
 import org.w3c.files.Blob

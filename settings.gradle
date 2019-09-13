@@ -16,5 +16,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'asoft-auth'
+rootProject.name = 'asoft-io'
 

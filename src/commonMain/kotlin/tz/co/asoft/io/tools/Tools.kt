@@ -7,9 +7,6 @@ import io.ktor.http.Headers
 import io.ktor.http.HeadersBuilder
 import io.ktor.http.HttpHeaders
 import io.ktor.http.content.PartData
-import io.ktor.util.InternalAPI
-import kotlinx.io.core.ByteReadPacket
-import kotlinx.io.core.Input
 import tz.co.asoft.io.file.File
 
 inline fun formData(block: FormBuilder.() -> Unit): List<PartData> =
@@ -24,7 +21,6 @@ class FormBuilder {
     /**
      * Append a pair [key]:[value] with optional [headers].
      */
-    @InternalAPI
     fun <T : Any> append(key: String, value: T, headers: Headers = Headers.Empty) {
         parts += FormPart(key, value, headers)
     }
@@ -57,30 +53,6 @@ class FormBuilder {
         parts += FormPart(key, value, headers)
     }
 
-    /**
-     * Append a pair [key]:[value] with optional [headers].
-     */
-    fun append(key: String, value: InputProvider, headers: Headers = Headers.Empty) {
-        parts += FormPart(key, value, headers)
-    }
-
-    /**
-     * Append a pair [key]:[InputProvider(block)] with optional [headers].
-     */
-    fun appendInput(key: String, headers: Headers = Headers.Empty, size: Long? = null, block: () -> Input) {
-        parts += FormPart(key, InputProvider(size, block), headers)
-    }
-
-    /**
-     * Append a pair [key]:[value] with optional [headers].
-     */
-    fun append(key: String, value: ByteReadPacket, headers: Headers = Headers.Empty) {
-        parts += FormPart(key, value, headers)
-    }
-
-    /**
-     * Append a form [part].
-     */
     fun <T : Any> append(part: FormPart<T>) {
         parts += part
     }
