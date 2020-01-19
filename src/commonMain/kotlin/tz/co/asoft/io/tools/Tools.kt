@@ -1,7 +1,6 @@
 package tz.co.asoft.io.tools
 
 import io.ktor.client.request.forms.FormPart
-import io.ktor.client.request.forms.InputProvider
 import io.ktor.client.request.forms.formData
 import io.ktor.http.Headers
 import io.ktor.http.HeadersBuilder
@@ -10,7 +9,7 @@ import io.ktor.http.content.PartData
 import tz.co.asoft.io.file.File
 
 inline fun formData(block: FormBuilder.() -> Unit): List<PartData> =
-    formData(*FormBuilder().apply(block).build().toTypedArray())
+        formData(*FormBuilder().apply(block).build().toTypedArray())
 
 /**
  * Form builder type used in [formData] builder function.

@@ -1,41 +1,43 @@
 buildscript {
     ext {
-        kotlin_version = '1.3.50'
-        ktor_version = "1.2.4"
+        kotlin_version = '1.3.61'
+        ktor_version = "1.3.0"
+        android_tools_version = "3.5.2"
+        serialization_version = "0.14.0"
     }
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31"
+        classpath "com.android.tools.build:gradle:$android_tools_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
     }
 }
 
 plugins {
-    id 'kotlin-multiplatform' version '1.3.50'
+    id 'kotlin-multiplatform' version '1.3.61'
 }
 
 repositories {
     google()
     jcenter()
     mavenCentral()
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://dl.bintray.com/kotlin/kotlin-js-wrappers' }
     maven { url 'https://dl.bintray.com/kotlinx/kotlinx' }
     maven { url "https://kotlin.bintray.com/kotlinx" }
-    maven { url "http://dl.bintray.com/kotlin/ktor" }
-
+    maven { url "https://jitpack.io" }
 }
 
 group 'tz.co.asoft'
-version '2.0.0'
+version '2.1.0'
 
 apply plugin: "com.android.library"
 apply plugin: "maven-publish"
+apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion 28
@@ -48,7 +50,10 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main {
+            java.srcDirs += 'src/androidMain/kotlin'
+            manifest.srcFile "src/androidMain/AndroidManifest.xml"
+        }
     }
 
     buildTypes {
@@ -77,14 +82,13 @@ kotlin {
     }
 
     js() {
-        browser()
-        nodejs()
+//        browser()
+//        nodejs()
         compilations.all {
             tasks[compileKotlinTaskName].kotlinOptions {
-                kotlinOptions.metaInfo = true
-                kotlinOptions.sourceMap = true
-                kotlinOptions.moduleKind = 'commonjs'
-                kotlinOptions.main = "call"
+                metaInfo = true
+                sourceMap = true
+                moduleKind = 'commonjs'
             }
         }
     }
@@ -98,6 +102,7 @@ kotlin {
             dependencies {
                 api kotlin('stdlib-common')
                 api("io.ktor:ktor-client-core:$ktor_version")
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
             }
         }
         commonTest {
@@ -111,6 +116,7 @@ kotlin {
             dependencies {
                 api kotlin('stdlib-jdk8')
                 api "io.ktor:ktor-client-android:$ktor_version"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
 
@@ -118,6 +124,7 @@ kotlin {
             dependencies {
                 api kotlin('stdlib-jdk8')
                 api "io.ktor:ktor-client-cio:$ktor_version"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
 
@@ -132,6 +139,7 @@ kotlin {
             dependencies {
                 api kotlin('stdlib-js')
                 api "io.ktor:ktor-client-js:$ktor_version"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
                 api(npm("text-encoding", "0.7.0"))
             }
         }

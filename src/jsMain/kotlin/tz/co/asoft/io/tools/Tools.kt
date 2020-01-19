@@ -12,7 +12,7 @@ inline fun Uint8Array.toByteArray() = ByteArray(length) { this[it] }
 
 suspend fun Blob.readBytes(onProgress: (Int) -> Unit = {}): ByteArray = suspendCancellableCoroutine { cont ->
     FileReader().apply {
-        onprogress = { onProgress(((100.0 * it.loaded) / it.total).toInt()) }
+        onprogress = { onProgress(((100.0 * it.loaded.toDouble()) / it.total.toDouble()).toInt()) }
         onload = { cont.resume(Uint8Array(result.unsafeCast<ArrayBuffer>()).toByteArray()) }
         readAsArrayBuffer(this@readBytes)
     }
