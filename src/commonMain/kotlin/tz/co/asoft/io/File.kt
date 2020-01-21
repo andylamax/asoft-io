@@ -1,4 +1,4 @@
-package tz.co.asoft.io.file
+package tz.co.asoft.io
 
 expect class File private constructor(ref: Any, name: String = "tmp") {
 
@@ -9,7 +9,7 @@ expect class File private constructor(ref: Any, name: String = "tmp") {
     constructor(byteArray: ByteArray, name: String = "tmp")
 
     suspend fun readBytes(): ByteArray
-    
+
     suspend fun readBytes(onProgress: (Int) -> Unit): ByteArray
 }
 

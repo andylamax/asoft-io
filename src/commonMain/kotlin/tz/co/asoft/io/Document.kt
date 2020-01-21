@@ -1,4 +1,4 @@
-package tz.co.asoft.io.document
+package tz.co.asoft.io
 
 import kotlinx.serialization.Serializable
 

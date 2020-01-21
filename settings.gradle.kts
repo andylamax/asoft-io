@@ -8,15 +8,12 @@ pluginManagement {
     }
 
     repositories {
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-
         mavenCentral()
-
-        maven { url 'https://plugins.gradle.org/m2/' }
+        maven(url = "https://plugins.gradle.org/m2/")
     }
 }
 
-enableFeaturePreview('GRADLE_METADATA')
+//enableFeaturePreview('GRADLE_METADATA')
 
-rootProject.name = 'asoft-io'
+rootProject.name = "asoft-io"
 

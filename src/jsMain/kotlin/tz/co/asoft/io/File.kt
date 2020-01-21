@@ -1,11 +1,8 @@
-package tz.co.asoft.io.file
+package tz.co.asoft.io
 
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Uint8Array
 import org.w3c.files.Blob
-import tz.co.asoft.io.exceptions.IOException
-import tz.co.asoft.io.tools.readBytes
-import tz.co.asoft.io.tools.toByteArray
 import org.w3c.files.File as JsFile
 
 actual class File private actual constructor(actual val ref: Any, actual var name: String) {
