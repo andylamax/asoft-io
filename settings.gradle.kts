@@ -1,19 +1,22 @@
 pluginManagement {
+    repositories {
+        google()
+        jcenter()
+        maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
+    }
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id == "kotlin-multiplatform") {
+            if (requested.id.id.contains("kotlin.multiplatform")) {
                 useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+            if (requested.id.id.contains("serialization")) {
+                useModule("org.jetbrains.kotlin:kotlin-serialization:${requested.version}")
+            }
+            if (requested.id.id.contains("android")) {
+                useModule("com.android.tools.build:gradle:${requested.version}")
             }
         }
     }
-
-    repositories {
-        mavenCentral()
-        maven(url = "https://plugins.gradle.org/m2/")
-    }
 }
 
-//enableFeaturePreview('GRADLE_METADATA')
-
-rootProject.name = "asoft-io"
-
+rootProject.name = "asoft-rx"
